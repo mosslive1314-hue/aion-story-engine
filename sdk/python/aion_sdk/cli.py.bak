@@ -1,0 +1,405 @@
+#!/usr/bin/env python3
+"""
+AION Story Engine CLI - 增强版
+
+命令行工具，用于与 AION Story Engine 交互
+
+安装:
+    pip install -e .
+
+使用:
+    aion --help
+    aion session create "My Story"
+    aion universe list
+    aion asset search "fire"
+"""
+
+import argparse
+import sys
+from typing import Optional
+
+from aion_sdk import AionClient
+
+# 版本信息
+VERSION = "6.0.0"
+
+
+class Colors:
+    """终端颜色常量"""
+    BLUE = "\033[94m"
+    GREEN = "\033[92m"
+    YELLOW = "\033[93m"
+    RED = "\033[91m"
+    PURPLE = "\033[95m"
+    CYAN = "\033[96m"
+    WHITE = "\033[97m"
+    BOLD = "\033[1m"
+    UNDERLINE = "\033[4m"
+    END = "\033[0m"
+
+
+def colorize(text: str, color: str) -> str:
+    """为文本添加颜色"""
+    return f"{color}{text}{Colors.END}"
+
+
+def print_header(title: str):
+    """打印标题"""
+    print(f"\n{Colors.BOLD}{Colors.CYAN}{'=' * 60}{Colors.END}")
+    print(f"{Colors.BOLD}{Colors.CYAN}{title.center(60)}{Colors.END}")
+    print(f"{Colors.BOLD}{Colors.CYAN}{'=' * 60}{Colors.END}\n")
+
+
+def print_success(message: str):
+    """打印成功消息"""
+    print(f"{Colors.GREEN}✅ {message}{Colors.END}")
+
+
+def print_error(message: str):
+    """打印错误消息"""
+    print(f"{Colors.RED}❌ {message}{Colors.END}")
+
+
+def print_info(message: str):
+    """打印信息消息"""
+    print(f"{Colors.BLUE}ℹ️  {message}{Colors.END}")
+
+
+def print_warning(message: str):
+    """打印警告消息"""
+    print(f"{Colors.YELLOW}⚠️  {message}{Colors.END}")
+
+
+def get_client(api_key: str, base_url: str) -> Optional[AionClient]:
+    """获取 API 客户端"""
+    try:
+        client = AionClient(api_key=api_key, base_url=base_url)
+        # 测试连接
+        client.health_check()
+        return client
+    except Exception as e:
+        print_error(f"无法连接到 API: {e}")
+        print_info(f"请检查 API 地址: {base_url}")
+        print_info(f"或者设置正确的 API Key: --api-key")
+        return None
+
+
+def cmd_health(args):
+    """健康检查命令"""
+    print_header("健康检查")
+
+    client = get_client(args.api_key, args.base_url)
+    if not client:
+        return
+
+    try:
+        health = client.health_check()
+        print_success(f"服务状态: {health['status']}")
+        print_info(f"版本: {health['version']}")
+        print_info(f"服务: {health['service']}")
+    except Exception as e:
+        print_error(f"健康检查失败: {e}")
+
+
+def cmd_session_create(args):
+    """创建会话命令"""
+    print_header("创建故事会话")
+
+    client = get_client(args.api_key, args.base_url)
+    if not client:
+        return
+
+    try:
+        session = client.create_session(name=args.name, owner_id=args.owner)
+        print_success(f"会话创建成功!")
+        print_info(f"会话 ID: {session.session_id}")
+        print_info(f"名称: {session.name}")
+        print_info(f"状态: {session.status}")
+        if args.verbose:
+            print_info(f"消息: {session.message}")
+    except Exception as e:
+        print_error(f"创建会话失败: {e}")
+
+
+def cmd_session_list(args):
+    """列出会话命令"""
+    print_header("故事会话列表")
+
+    client = get_client(args.api_key, args.base_url)
+    if not client:
+        return
+
+    try:
+        sessions = client.list_sessions(skip=args.skip, limit=args.limit)
+        print_info(f"找到 {len(sessions)} 个会话")
+
+        for session in sessions:
+            status_color = Colors.GREEN if session.status == "active" else Colors.YELLOW
+            print(f"\n{Colors.BOLD}{session.name}{Colors.END}")
+            print(f"  ID: {session.session_id}")
+            print(f"  状态: {status_color}{session.status}{Colors.END}")
+
+    except Exception as e:
+        print_error(f"列出会话失败: {e}")
+
+
+def cmd_universe_list(args):
+    """列出宇宙命令"""
+    print_header("多元宇宙列表")
+
+    client = get_client(args.api_key, args.base_url)
+    if not client:
+        return
+
+    try:
+        universes = client.list_universes(skip=args.skip, limit=args.limit)
+        print_info(f"找到 {len(universes)} 个宇宙")
+
+        for universe in universes:
+            theme_color = Colors.PURPLE if universe.theme == "fantasy" else Colors.CYAN
+            visibility = "🌍" if universe.is_public else "🔒"
+
+            print(f"\n{visibility} {Colors.BOLD}{universe.name}{Colors.END}")
+            print(f"  主题: {theme_color}{universe.theme}{Colors.END}")
+            print(f"  创建者: {universe.creator_id}")
+            print(f"  标签: {', '.join(universe.tags[:3])}")
+
+    except Exception as e:
+        print_error(f"列出宇宙失败: {e}")
+
+
+def cmd_universe_create(args):
+    """创建宇宙命令"""
+    print_header("创建多元宇宙")
+
+    client = get_client(args.api_key, args.base_url)
+    if not client:
+        return
+
+    # 处理标签
+    tags = args.tags.split(",") if args.tags else []
+
+    # 处理物理规则
+    physics_rules = {}
+    if args.gravity:
+        physics_rules["gravity"] = args.gravity
+
+    try:
+        universe = client.create_universe(
+            name=args.name,
+            creator_id=args.creator,
+            description=args.description,
+            physics_rules=physics_rules,
+            theme=args.theme,
+            tags=tags,
+            is_public=not args.private
+        )
+        print_success(f"宇宙创建成功!")
+        print_info(f"宇宙 ID: {universe.universe_id}")
+        print_info(f"名称: {universe.name}")
+        print_info(f"主题: {universe.theme}")
+        print_info(f"标签: {', '.join(universe.tags)}")
+    except Exception as e:
+        print_error(f"创建宇宙失败: {e}")
+
+
+def cmd_asset_list(args):
+    """列出资产命令"""
+    print_header("创作资产列表")
+
+    client = get_client(args.api_key, args.base_url)
+    if not client:
+        return
+
+    try:
+        assets = client.list_assets(skip=args.skip, limit=args.limit)
+        print_info(f"找到 {len(assets)} 个资产")
+
+        for asset in assets:
+            price = "免费" if asset.price == 0 else f"${asset.price:.2f}"
+            rating = f"⭐ {asset.rating:.1f}" if asset.rating else "无评分"
+            downloads = f"⬇️ {asset.downloads}" if asset.downloads else ""
+
+            print(f"\n{Colors.BOLD}{asset.name}{Colors.END}")
+            print(f"  类型: {asset.type}")
+            print(f"  价格: {price}")
+            print(f"  创建者: {asset.creator or '未知'}")
+            print(f"  {rating} {downloads}")
+
+    except Exception as e:
+        print_error(f"列出资产失败: {e}")
+
+
+def cmd_marketplace_stats(args):
+    """市场统计命令"""
+    print_header("创作者市场统计")
+
+    client = get_client(args.api_key, args.base_url)
+    if not client:
+        return
+
+    try:
+        stats = client.get_marketplace_stats()
+        print_success("市场数据统计")
+        print_info(f"总资产数: {stats['total_listings']}")
+        print_info(f"总交易数: {stats['total_transactions']}")
+        print_info(f"总收入: ${stats['total_revenue']:,.2f}")
+    except Exception as e:
+        print_error(f"获取市场统计失败: {e}")
+
+
+def cmd_proposal_list(args):
+    """列出提案命令"""
+    print_header("治理提案列表")
+
+    client = get_client(args.api_key, args.base_url)
+    if not client:
+        return
+
+    try:
+        proposals = client.list_proposals(skip=args.skip, limit=args.limit, status=args.status)
+        print_info(f"找到 {len(proposals)} 个提案")
+
+        for proposal in proposals:
+            status_color = Colors.GREEN if proposal.status == "active" else Colors.YELLOW
+
+            print(f"\n{Colors.BOLD}{proposal.title}{Colors.END}")
+            print(f"  类型: {proposal.proposal_type}")
+            print(f"  状态: {status_color}{proposal.status}{Colors.END}")
+            print(f"  创建者: {proposal.proposer_id}")
+            print(f"  投票: ✅ {proposal.votes_for} / ❌ {proposal.votes_against} / 🤐 {proposal.votes_abstain}")
+
+    except Exception as e:
+        print_error(f"列出提案失败: {e}")
+
+
+def create_parser():
+    """创建命令行解析器"""
+    parser = argparse.ArgumentParser(
+        prog="aion",
+        description="AION Story Engine CLI",
+        epilog="""
+示例:
+  aion --api-key your_key session create "My Story"
+  aion universe list --limit 10
+  aion asset search fire
+
+环境变量:
+  AION_API_KEY: API 密钥
+  AION_API_URL: API 基础 URL (默认: http://localhost:8000/api/v1)
+        """,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+
+    # 全局参数
+    parser.add_argument(
+        "--api-key",
+        type=str,
+        default="test_api_key",
+        help="API 密钥 (默认: test_api_key)"
+    )
+    parser.add_argument(
+        "--base-url",
+        type=str,
+        default="http://localhost:8000/api/v1",
+        help="API 基础 URL"
+    )
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"%(prog)s {VERSION}"
+    )
+    parser.add_argument(
+        "-v", "--verbose",
+        action="store_true",
+        help="详细输出"
+    )
+
+    # 子命令
+    subparsers = parser.add_subparsers(dest="command", help="可用命令")
+
+    # 健康检查
+    subparsers.add_parser("health", help="执行健康检查")
+
+    # 会话管理
+    session_parser = subparsers.add_parser("session", help="会话管理")
+    session_subparsers = session_parser.add_subparsers(dest="action")
+
+    create = session_subparsers.add_parser("create", help="创建会话")
+    create.add_argument("name", help="会话名称")
+    create.add_argument("--owner", help="所有者 ID")
+    create.set_defaults(func=cmd_session_create)
+
+    list_sessions = session_subparsers.add_parser("list", help="列出会话")
+    list_sessions.add_argument("--skip", type=int, default=0, help="跳过的记录数")
+    list_sessions.add_argument("--limit", type=int, default=100, help="返回的最大记录数")
+    list_sessions.set_defaults(func=cmd_session_list)
+
+    # 宇宙管理
+    universe_parser = subparsers.add_parser("universe", help="宇宙管理")
+    universe_subparsers = universe_parser.add_subparsers(dest="action")
+
+    list_universe = universe_subparsers.add_parser("list", help="列出宇宙")
+    list_universe.add_argument("--skip", type=int, default=0, help="跳过的记录数")
+    list_universe.add_argument("--limit", type=int, default=100, help="返回的最大记录数")
+    list_universe.set_defaults(func=cmd_universe_list)
+
+    create_universe = universe_subparsers.add_parser("create", help="创建宇宙")
+    create_universe.add_argument("name", help="宇宙名称")
+    create_universe.add_argument("creator", help="创建者 ID")
+    create_universe.add_argument("description", help="宇宙描述")
+    create_universe.add_argument("theme", help="宇宙主题")
+    create_universe.add_argument("--tags", help="标签列表（逗号分隔）")
+    create_universe.add_argument("--gravity", type=float, help="重力加速度")
+    create_universe.add_argument("--private", action="store_true", help="设为私有宇宙")
+    create_universe.set_defaults(func=cmd_universe_create)
+
+    # 资产管理
+    asset_parser = subparsers.add_parser("asset", help="资产管理")
+    asset_subparsers = asset_parser.add_subparsers(dest="action")
+
+    list_asset = asset_subparsers.add_parser("list", help="列出资产")
+    list_asset.add_argument("--skip", type=int, default=0, help="跳过的记录数")
+    list_asset.add_argument("--limit", type=int, default=100, help="返回的最大记录数")
+    list_asset.set_defaults(func=cmd_asset_list)
+
+    # 市场
+    market_parser = subparsers.add_parser("marketplace", help="市场管理")
+    market_subparsers = market_parser.add_subparsers(dest="action")
+
+    stats = market_subparsers.add_parser("stats", help="获取市场统计")
+    stats.set_defaults(func=cmd_marketplace_stats)
+
+    # 治理
+    governance_parser = subparsers.add_parser("governance", help="治理管理")
+    governance_subparsers = governance_parser.add_subparsers(dest="action")
+
+    list_proposal = governance_subparsers.add_parser("list", help="列出提案")
+    list_proposal.add_argument("--skip", type=int, default=0, help="跳过的记录数")
+    list_proposal.add_argument("--limit", type=int, default=100, help="返回的最大记录数")
+    list_proposal.add_argument("--status", help="状态过滤")
+    list_proposal.set_defaults(func=cmd_proposal_list)
+
+    return parser
+
+
+def main():
+    """主函数"""
+    parser = create_parser()
+    args = parser.parse_args()
+
+    # 如果没有命令，显示帮助
+    if not args.command:
+        parser.print_help()
+        return
+
+    # 执行命令
+    if hasattr(args, "func"):
+        args.func(args)
+    else:
+        print_error(f"未知命令: {args.command}")
+        parser.print_help()
+
+
+if __name__ == "__main__":
+    main()

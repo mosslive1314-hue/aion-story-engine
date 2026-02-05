@@ -1,0 +1,401 @@
+{
+	"info": {
+		"name": "AION Story Engine API",
+		"description": "AION Story Engine API - 想象力的基础设施\n\nAPI 基础 URL：\n- 开发：http://localhost:8000/api/v1\n- 生产：https://api.aion-story.com/api/v1\n\n认证：\n在请求头中添加：X-API-Key: {{api_key}}",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "api_url",
+			"value": "http://localhost:8000/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "api_key",
+			"value": "test_api_key",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "System",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/../health",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"..",
+								"health"
+							]
+						}
+					}
+				},
+				{
+					"name": "Root",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/../",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"..",
+								""
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Sessions",
+			"item": [
+				{
+					"name": "Create Session",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.to.have.status(201)) {",
+									"    const response = pm.response.json();",
+									"    pm.environment.set('session_id', response.session_id);",
+									"    console.log('Created session:', response.session_id);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-API-Key",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"My Epic Story\",\n  \"owner_id\": \"user123\"\n}"
+						},
+						"url": {
+							"raw": "{{api_url}}/sessions",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"sessions"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Session",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Response has session_id', function () {",
+									"    const response = pm.response.json();",
+									"    pm.expect(response).to.have.property('session_id');",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/sessions/{{session_id}}",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"sessions",
+								"{{session_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "List Sessions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/sessions?skip=0&limit=100",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"sessions"
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Assets",
+			"item": [
+				{
+					"name": "List Assets",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/assets?skip=0&limit=100",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"assets"
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Marketplace",
+			"item": [
+				{
+					"name": "Get Stats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/marketplace/stats",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"marketplace",
+								"stats"
+							]
+						}
+					}
+				},
+				{
+					"name": "List Assets",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/marketplace/assets",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"marketplace",
+								"assets"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Universes",
+			"item": [
+				{
+					"name": "Create Universe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.to.have.status(201)) {",
+									"    const response = pm.response.json();",
+									"    pm.environment.set('universe_id', response.universe_id);",
+									"    console.log('Created universe:', response.universe_id);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-API-Key",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Fantasy World\",\n  \"creator_id\": \"user123\",\n  \"description\": \"A magical fantasy universe\",\n  \"physics_rules\": {\n    \"gravity\": 9.8,\n    \"magic_system\": \"mana-based\"\n  },\n  \"theme\": \"fantasy\",\n  \"tags\": [\"magic\", \"dragons\", \"medieval\"],\n  \"is_public\": true\n}"
+						},
+						"url": {
+							"raw": "{{api_url}}/universes",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"universes"
+							]
+						}
+					}
+				},
+				{
+					"name": "List Universes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/universes?skip=0&limit=100",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"universes"
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Governance",
+			"item": [
+				{
+					"name": "List Proposals",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/governance/proposals?skip=0&limit=100",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"governance",
+								"proposals"
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test('Status code is 2xx', function () {",
+					"    pm.response.to.be.success;",
+					"});"
+				]
+			}
+		}
+	]
+}

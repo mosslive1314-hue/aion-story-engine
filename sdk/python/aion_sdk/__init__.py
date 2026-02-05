@@ -1,0 +1,45 @@
+"""
+AION Story Engine Python SDK
+
+一个用于与 AION Story Engine API 交互的 Python SDK
+
+主要类:
+    - AionClient: API 客户端
+    - Session: 故事会话
+    - Asset: 创作资产
+    - Universe: 多元宇宙
+    - Proposal: 治理提案
+
+便捷函数:
+    - create_client(): 创建客户端实例
+
+使用示例:
+    from aion_sdk import AionClient
+
+    client = AionClient(api_key="your_api_key")
+    session = client.create_session(name="My Story")
+    print(f"Created: {session.session_id}")
+"""
+
+from .core import (
+    AionClient,
+    Session,
+    Asset,
+    Universe,
+    Proposal,
+    create_client,
+)
+
+__version__ = "6.0.0"
+__author__ = "AION Story Engine Team"
+__email__ = "support@aion-story.com"
+__license__ = "MIT"
+
+__all__ = [
+    "AionClient",
+    "Session",
+    "Asset",
+    "Universe",
+    "Proposal",
+    "create_client",
+]
