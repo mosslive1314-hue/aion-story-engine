@@ -1,0 +1,25 @@
+Skill: aion-story-engine
+Location: C:\Users\maiyi\Desktop\story\.claude\skills\aion-story-engine
+
+Created: 2025-02-05
+
+Structure:
+  - SKILL.md (276 lines) - Main skill documentation
+  - assets/ - Asset templates and examples
+    - README.md - Assets guide
+  - references/ - Additional documentation
+    - README.md - References guide
+
+Description:
+Comprehensive skill for the AION Story Engine - an interactive
+narrative creation system with 5-layer architecture, asset systems,
+digital twins, collaboration features, and marketplace.
+
+Features documented:
+  - 5-Layer Architecture (Blackboard, Physics, Cognition, Narrative, Node Management)
+  - Asset Systems (Characters, Locations, Items, Themes)
+  - Digital Twins & Collaboration
+  - Marketplace integration
+  - Technical implementation details
+  - Best practices and workflows
+

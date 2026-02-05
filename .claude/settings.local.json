@@ -16,7 +16,12 @@
       "Bash(make:*)",
       "Bash(black:*)",
       "Bash(isort:*)",
-      "Bash(python3 -c:*)"
+      "Bash(python3 -c:*)",
+      "Bash(git log:*)",
+      "Bash(set PYTHONIOENCODING=utf-8)",
+      "Bash(chcp:*)",
+      "Bash(PYTHONIOENCODING=utf-8 python skill-creator/scripts/package_skill.py:*)",
+      "Bash(PYTHONIOENCODING=utf-8 python:*)"
     ]
   }
 }
