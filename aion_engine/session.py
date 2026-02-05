@@ -1,18 +1,20 @@
 import json
 import os
 import uuid
-from datetime import datetime
-from typing import Dict, Any, Optional
 from dataclasses import asdict
+from datetime import datetime
+from typing import Any, Dict, Optional
 
-from aion_engine.nodes import NodeTree
 from aion_engine.engine import StoryEngine
+from aion_engine.nodes import NodeTree
 
 
 class Session:
     """Manages a story creation session"""
 
-    def __init__(self, session_dir: str, title: str, node_tree: Optional[NodeTree] = None):
+    def __init__(
+        self, session_dir: str, title: str, node_tree: Optional[NodeTree] = None
+    ):
         self.session_id = str(uuid.uuid4())[:8]
         self.title = title
         self.session_dir = session_dir
@@ -23,7 +25,7 @@ class Session:
         self.metadata: Dict[str, Any] = {}
 
     @classmethod
-    def create(cls, base_dir: str, title: str) -> 'Session':
+    def create(cls, base_dir: str, title: str) -> "Session":
         """Create a new session"""
         session_id = str(uuid.uuid4())[:8]
         session_dir = os.path.join(base_dir, session_id)
@@ -39,7 +41,7 @@ class Session:
         self.node_tree.create_node(
             user_action=user_action,
             world_state=result.world_state,
-            npc_states=result.npc_states
+            npc_states=result.npc_states,
         )
 
         self.updated_at = datetime.now().isoformat()
@@ -53,7 +55,7 @@ class Session:
             "title": self.title,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
-            "metadata": self.metadata
+            "metadata": self.metadata,
         }
 
         with open(os.path.join(self.session_dir, "metadata.json"), "w") as f:
@@ -63,16 +65,15 @@ class Session:
         nodes_data = {
             "root_id": self.node_tree.root_id,
             "nodes": {
-                node_id: asdict(node)
-                for node_id, node in self.node_tree.nodes.items()
-            }
+                node_id: asdict(node) for node_id, node in self.node_tree.nodes.items()
+            },
         }
 
         with open(os.path.join(self.session_dir, "nodes.json"), "w") as f:
             json.dump(nodes_data, f, indent=2)
 
     @classmethod
-    def load(cls, session_dir: str) -> 'Session':
+    def load(cls, session_dir: str) -> "Session":
         """Load session from disk"""
         # Load metadata
         with open(os.path.join(session_dir, "metadata.json"), "r") as f:

@@ -1,6 +1,7 @@
 from aion_engine.core.blackboard import Blackboard
 from aion_engine.core.cognition import CognitionEngine
 
+
 def test_npc_decision_making():
     bb = Blackboard()
     bb.update_npc_state("isaac", "stress_level", 0.8)
@@ -13,6 +14,7 @@ def test_npc_decision_making():
     assert "isaac" in result.npc_actions
     assert len(result.npc_actions["isaac"]) > 0
 
+
 def test_isaac_fire_response():
     bb = Blackboard()
     bb.update_npc_state("isaac", "role", "scientist")
@@ -22,5 +24,7 @@ def test_isaac_fire_response():
     result = engine.process(bb)
 
     assert result.npc_actions["isaac"][0]["action"] in [
-        "extinguish_fire", "escape", "prioritize_notes"
+        "extinguish_fire",
+        "escape",
+        "prioritize_notes",
     ]

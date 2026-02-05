@@ -1,7 +1,7 @@
 import uuid
-from typing import Dict, Any, List, Optional
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
 from datetime import datetime
+from typing import Any, Dict, List, Optional
 
 
 @dataclass
@@ -31,7 +31,7 @@ class NodeTree:
         user_action: str,
         world_state: Dict[str, Any],
         parent_id: Optional[str] = None,
-        npc_states: Optional[Dict[str, Any]] = None
+        npc_states: Optional[Dict[str, Any]] = None,
     ) -> Node:
         """Create a new story node"""
         node_id = str(uuid.uuid4())[:8]
@@ -45,7 +45,7 @@ class NodeTree:
             npc_states=npc_states or {},
             user_action=user_action,
             narrative="",
-            choices=[]
+            choices=[],
         )
 
         self.nodes[node_id] = node
@@ -61,10 +61,7 @@ class NodeTree:
 
     def get_children(self, parent_id: str) -> List[Node]:
         """Get all child nodes of a parent"""
-        return [
-            node for node in self.nodes.values()
-            if node.parent_id == parent_id
-        ]
+        return [node for node in self.nodes.values() if node.parent_id == parent_id]
 
     def get_path_to_root(self, node_id: str) -> List[Node]:
         """Get path from node to root"""

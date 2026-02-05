@@ -1,6 +1,7 @@
 from aion_engine.core.blackboard import Blackboard
 from aion_engine.core.narrative import NarrativeEngine
 
+
 def test_generate_narrative():
     bb = Blackboard()
     bb.update_world_state("fire_active", True)
@@ -11,6 +12,7 @@ def test_generate_narrative():
 
     assert len(result) > 0
     assert "fire" in result.lower() or "艾萨克" in result
+
 
 def test_timeline_prediction():
     bb = Blackboard()

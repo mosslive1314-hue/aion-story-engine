@@ -8,7 +8,7 @@ class NarrativeEngine:
         self.narrative_templates = {
             "fire": "艾萨克看着燃烧的{}，{}",
             "extinguish": "艾萨克{}，试图{}",
-            "escape": "火焰已经{}，艾萨克{}"
+            "escape": "火焰已经{}，艾萨克{}",
         }
 
     def generate(self, blackboard) -> str:
@@ -22,13 +22,9 @@ class NarrativeEngine:
             stress = npc.get("stress_level", 0)
 
             if stress > 0.7:
-                narrative_parts.append(
-                    "艾萨克看着火焰蔓延，他的眼神充满了恐慌。"
-                )
+                narrative_parts.append("艾萨克看着火焰蔓延，他的眼神充满了恐慌。")
             else:
-                narrative_parts.append(
-                    "艾萨克注意到植物开始燃烧，表情变得严肃。"
-                )
+                narrative_parts.append("艾萨克注意到植物开始燃烧，表情变得严肃。")
         else:
             # Normal scene description
             location = blackboard.world_state.get("location", "实验室")

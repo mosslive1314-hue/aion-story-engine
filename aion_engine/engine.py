@@ -1,11 +1,11 @@
-from typing import Dict, Any, Optional
-from datetime import datetime
 from dataclasses import dataclass
+from datetime import datetime
+from typing import Any, Dict, Optional
 
 from aion_engine.core.blackboard import Blackboard
-from aion_engine.core.physics import PhysicsEngine
 from aion_engine.core.cognition import CognitionEngine
 from aion_engine.core.narrative import NarrativeEngine
+from aion_engine.core.physics import PhysicsEngine
 
 
 @dataclass
@@ -61,5 +61,5 @@ class StoryEngine:
             npc_actions=cognition_result.npc_actions,
             narrative=narrative,
             prediction=prediction,
-            timestamp=datetime.now().isoformat()
+            timestamp=datetime.now().isoformat(),
         )

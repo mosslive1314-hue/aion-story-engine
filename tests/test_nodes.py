@@ -1,5 +1,6 @@
 from aion_engine.nodes import Node, NodeTree
 
+
 def test_create_node():
     tree = NodeTree()
     node = tree.create_node("点燃酒精", {"fire": True})
@@ -7,6 +8,7 @@ def test_create_node():
     assert node.node_id is not None
     assert node.user_action == "点燃酒精"
     assert node.world_state["fire"] == True
+
 
 def test_branch_creation():
     tree = NodeTree()

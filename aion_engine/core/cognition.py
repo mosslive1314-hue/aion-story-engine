@@ -1,5 +1,5 @@
-from typing import List, Dict, Any
 from dataclasses import dataclass
+from typing import Any, Dict, List
 
 
 @dataclass
@@ -27,9 +27,7 @@ class CognitionEngine:
             npc_actions[npc_id] = [action]
 
         return CognitionResult(
-            npc_states=new_npc_states,
-            npc_actions=npc_actions,
-            decisions=decisions
+            npc_states=new_npc_states, npc_actions=npc_actions, decisions=decisions
         )
 
     def _decide_action(self, npc_id: str, npc_state: dict, world_state: dict) -> dict:
@@ -42,17 +40,17 @@ class CognitionEngine:
                     return {
                         "action": "extinguish_fire",
                         "confidence": 0.9,
-                        "reasoning": "High stress from fire, attempting to extinguish"
+                        "reasoning": "High stress from fire, attempting to extinguish",
                     }
                 else:
                     return {
                         "action": "prioritize_notes",
                         "confidence": 0.8,
-                        "reasoning": "Fire detected, protecting research notes first"
+                        "reasoning": "Fire detected, protecting research notes first",
                     }
 
         return {
             "action": "continue_task",
             "confidence": 0.5,
-            "reasoning": "No immediate threat detected"
+            "reasoning": "No immediate threat detected",
         }

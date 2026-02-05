@@ -1,6 +1,7 @@
 from aion_engine.core.blackboard import Blackboard
 from aion_engine.core.physics import PhysicsEngine
 
+
 def test_fire_spreads():
     bb = Blackboard()
     bb.update_world_state("fire_active", True)
@@ -12,6 +13,7 @@ def test_fire_spreads():
 
     assert result.world_state["temperature"] > 100
     assert any(event.get("type") == "fire_has_spread" for event in result.events)
+
 
 def test_conservation_of_energy():
     bb = Blackboard()

@@ -1,5 +1,5 @@
-from typing import Any
 from dataclasses import dataclass
+from typing import Any
 
 
 @dataclass
@@ -16,7 +16,7 @@ class PhysicsEngine:
         self.physics_laws = [
             "conservation_of_energy",
             "conservation_of_mass",
-            "thermodynamics"
+            "thermodynamics",
         ]
 
     def process(self, blackboard) -> PhysicsResult:
@@ -29,17 +29,16 @@ class PhysicsEngine:
         if blackboard.world_state.get("fire_active", False):
             if blackboard.world_state.get("oxygen_level", 0) > 0.15:
                 new_state["temperature"] = min(
-                    new_state.get("temperature", 25) + 150,
-                    1000
+                    new_state.get("temperature", 25) + 150, 1000
                 )
-                events.append({
-                    "type": "fire_has_spread",
-                    "source": "alcohol_burn",
-                    "intensity": "high"
-                })
+                events.append(
+                    {
+                        "type": "fire_has_spread",
+                        "source": "alcohol_burn",
+                        "intensity": "high",
+                    }
+                )
 
         return PhysicsResult(
-            world_state=new_state,
-            events=events,
-            violations=violations
+            world_state=new_state, events=events, violations=violations
         )

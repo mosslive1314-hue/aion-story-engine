@@ -1,6 +1,8 @@
-from aion_engine.session import Session
-import tempfile
 import os
+import tempfile
+
+from aion_engine.session import Session
+
 
 def test_lab_fire_scenario():
     """Integration test: Full lab fire scenario"""
