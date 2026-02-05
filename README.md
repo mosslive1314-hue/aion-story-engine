@@ -45,13 +45,53 @@ AION Story Engine 是一个基于世界模型的多层叙事系统，结合了 M
 - 分支对比与合并
 - 时间线折叠预测
 
+## 🚀 快速开始
+
+### 安装
+
+```bash
+git clone <repository-url>
+cd story
+pip install -e ".[dev]"
+```
+
+### 使用示例
+
+```python
+from aion_engine.session import Session
+import tempfile
+
+# 创建一个新的会话
+with tempfile.TemporaryDirectory() as tmpdir:
+    session = Session.create(tmpdir, "我的故事")
+
+    # 推进故事
+    result = session.advance("进入实验室", {"location": "实验室"})
+    print(result.narrative)
+    # 输出: "艾萨克在实验室中工作。"
+
+    # 继续故事，触发火灾
+    result = session.advance("打翻酒精瓶并点火", {})
+    print(result.narrative)
+    # 输出: "艾萨克注意到植物开始燃烧，表情变得严肃。"
+    print(f"火灾状态: {result.world_state.get('fire_active')}")
+    # 输出: "火灾状态: True"
+
+    # NPC 反应
+    print(f"NPC行动: {result.npc_actions['isaac'][0]['action']}")
+    # 输出: "NPC行动: prioritize_notes"
+
+    # 保存会话
+    session.save()
+```
+
 ## 🚀 实现路线图
 
-### Phase 1: MVP（2个月）
-- [ ] 核心三层引擎
-- [ ] 节点树管理
-- [ ] 本地文件系统
-- [ ] CLI界面
+### Phase 1: MVP（已完成）
+- [x] 核心三层引擎
+- [x] 节点树管理
+- [x] 本地文件系统
+- [x] 测试用例
 
 ### Phase 2: 资产系统（2个月）
 - [ ] 抽象层引擎
