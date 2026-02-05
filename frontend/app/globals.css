@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --cosmic-blue: #0B1426;
+    --nebula-purple: #1E1B3E;
+    --star-white: #E8E9F3;
+    --plasma-pink: #FF00AA;
+    --quantum-green: #00FF88;
+  }
+
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  html,
+  body {
+    max-width: 100vw;
+    overflow-x: hidden;
+    background: var(--cosmic-blue);
+    color: var(--star-white);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  body {
+    min-height: 100vh;
+    background-image:
+      radial-gradient(circle at 20% 80%, rgba(255, 0, 170, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(0, 255, 136, 0.1) 0%, transparent 50%);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-plasma-gradient text-white font-semibold rounded-lg hover:opacity-90 transition-opacity;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-nebula-purple text-star-white font-semibold rounded-lg border border-plasma-pink/30 hover:border-plasma-pink/60 transition-colors;
+  }
+
+  .card {
+    @apply bg-nebula-purple/50 backdrop-blur-sm rounded-xl border border-plasma-pink/20 p-6 hover:border-plasma-pink/40 transition-colors;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 bg-cosmic-blue border border-plasma-pink/30 rounded-lg text-star-white placeholder-gray-400 focus:outline-none focus:border-plasma-pink/60 transition-colors;
+  }
+}

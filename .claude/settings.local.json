@@ -15,7 +15,8 @@
       "Bash(git commit:*)",
       "Bash(make:*)",
       "Bash(black:*)",
-      "Bash(isort:*)"
+      "Bash(isort:*)",
+      "Bash(python3 -c:*)"
     ]
   }
 }
