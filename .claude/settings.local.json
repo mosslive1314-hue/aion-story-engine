@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm update:*)",
+      "Skill(skill-creator)",
+      "Bash(claude:*)",
+      "Bash(python scripts/init_skill.py:*)",
+      "Bash(python:*)",
+      "mcp__web-search-prime__webSearchPrime",
+      "Bash(git init:*)",
+      "Bash(tree:*)",
+      "Bash(pytest:*)",
+      "Bash(pip:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}
