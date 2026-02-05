@@ -11,7 +11,11 @@
       "Bash(tree:*)",
       "Bash(pytest:*)",
       "Bash(pip:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(make:*)",
+      "Bash(black:*)",
+      "Bash(isort:*)"
     ]
   }
 }
