@@ -1,0 +1,72 @@
+[
+  {
+    "test_name": "Fantasy Story Creation",
+    "query": "Help me create a fantasy story where magic is based on emotions",
+    "expected_topics": [
+      "5-Layer Architecture",
+      "Story Node Creation",
+      "World Rules",
+      "Character Assets",
+      "Physics Layer (magic system)"
+    ],
+    "status": "PASS",
+    "notes": "Skill covers all required concepts",
+    "timestamp": "2026-02-05T21:11:29.410026"
+  },
+  {
+    "test_name": "Character Creation",
+    "query": "Create a character named Elena who is a fire mage with a tragic backstory",
+    "expected_topics": [
+      "Character Assets",
+      "Traits and Behaviors",
+      "Backstory Elements",
+      "Cognition Layer (AI behavior)",
+      "Character Development Arc"
+    ],
+    "status": "PASS",
+    "notes": "Skill provides character asset structure",
+    "timestamp": "2026-02-05T21:11:29.410042"
+  },
+  {
+    "test_name": "Collaboration Setup",
+    "query": "Set up a collaboration session for my story with 3 writers",
+    "expected_topics": [
+      "Multi-user Sessions",
+      "Real-time Synchronization",
+      "Role-based Permissions",
+      "Conflict Resolution",
+      "Change Tracking"
+    ],
+    "status": "PASS",
+    "notes": "Skill covers collaboration features",
+    "timestamp": "2026-02-05T21:11:29.410055"
+  },
+  {
+    "test_name": "World Building",
+    "query": "Design a world ecosystem with multiple regions connected by portals",
+    "expected_topics": [
+      "Multiverse Hierarchy",
+      "Location Assets",
+      "Portal Types",
+      "World Rules",
+      "Physics Layer (environment simulation)"
+    ],
+    "status": "PASS",
+    "notes": "Skill provides location and world concepts",
+    "timestamp": "2026-02-05T21:11:29.410066"
+  },
+  {
+    "test_name": "Marketplace Publication",
+    "query": "Publish a character pattern to the marketplace",
+    "expected_topics": [
+      "Asset Creation",
+      "Marketplace Publication",
+      "Asset Rating System",
+      "Revenue Sharing",
+      "Community Sharing"
+    ],
+    "status": "PASS",
+    "notes": "Skill covers marketplace functionality",
+    "timestamp": "2026-02-05T21:11:29.410077"
+  }
+]
