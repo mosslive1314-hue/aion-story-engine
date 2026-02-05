@@ -29,6 +29,10 @@ class NarrativeEngine:
                 narrative_parts.append(
                     "艾萨克注意到植物开始燃烧，表情变得严肃。"
                 )
+        else:
+            # Normal scene description
+            location = blackboard.world_state.get("location", "实验室")
+            narrative_parts.append(f"艾萨克在{location}中工作。")
 
         # NPC actions
         for npc_id, npc_state in blackboard.npcs.items():
