@@ -1,0 +1,177 @@
+{
+  "version": "2.0",
+  "last_updated": "2026-02-06",
+  "total_cases": 6,
+  "cases": [
+    {
+      "id": "aion_001",
+      "name": "AION",
+      "domains": ["游戏开发", "世界模型"],
+      "domain_types": ["technology", "ai"],
+      "level": 2,
+      "difficulty_score": 65,
+      "keywords": ["因果推理", "反事实模拟", "时间线折叠", "游戏叙事"],
+      "summary": "用世界模型的因果推理替代游戏脚本编写，实现动态叙事生成",
+      "business_value": "高",
+      "innovation_score": 85,
+      "full_description": "See SKILL.md Level 1-2 cases section",
+      "mechanisms": [
+        "因果链推理替代脚本编写",
+        "反事实模拟实现时间线折叠"
+      ],
+      "revenue_model": "B2B游戏引擎授权",
+      "market_size": "100亿",
+      "implementation_feasibility": 70
+    },
+    {
+      "id": "synapse_x_002",
+      "name": "SYNAPSE-X",
+      "domains": ["灵波开源", "Meta世界模型"],
+      "domain_types": ["open_source", "ai", "platform"],
+      "level": 2,
+      "difficulty_score": 70,
+      "keywords": ["联邦学习", "代币激励", "去中心化AI", "数据融合"],
+      "summary": "用联邦学习将开源社区与Meta级数据融合，构建去中心化AI训练经济",
+      "business_value": "极高",
+      "innovation_score": 90,
+      "full_description": "See SKILL.md Level 1-2 cases section",
+      "mechanisms": [
+        "联邦学习实现数据融合",
+        "代币激励经济系统"
+      ],
+      "revenue_model": "平台抽成+代币经济",
+      "market_size": "500亿",
+      "implementation_feasibility": 60
+    },
+    {
+      "id": "schrodingers_cafe_003",
+      "name": "Schrödinger's Café",
+      "domains": ["咖啡连锁", "量子力学"],
+      "domain_types": ["retail", "physics"],
+      "level": 1,
+      "difficulty_score": 45,
+      "keywords": ["叠加态", "观察者效应", "量子纠缠", "未定义菜单"],
+      "summary": "用量子叠加态实现未定义菜单，顾客点单时口味才塌缩确定",
+      "business_value": "中高",
+      "innovation_score": 80,
+      "full_description": "See SKILL.md Level 1-2 cases section",
+      "mechanisms": [
+        "叠加态→未定义菜单",
+        "量子纠缠→异地社交连接"
+      ],
+      "revenue_model": "会员制+体验付费",
+      "market_size": "50亿",
+      "implementation_feasibility": 75
+    },
+    {
+      "id": "mycelium_logistics_004",
+      "name": "Mycelium Logistics",
+      "domains": ["物流配送", "真菌网络"],
+      "domain_types": ["logistics", "biology"],
+      "level": 3,
+      "difficulty_score": 82,
+      "keywords": ["分布式决策", "网络自愈合", "资源路由", "群体免疫"],
+      "summary": "用真菌网络的分布式决策替代中央调度，包裹自主导航",
+      "business_value": "高",
+      "innovation_score": 88,
+      "full_description": "See SKILL.md Level 3 section",
+      "mechanisms": [
+        "分布式决策替代中央调度",
+        "网络自愈合实现抗故障"
+      ],
+      "revenue_model": "SaaS+交易抽成",
+      "market_size": "300亿",
+      "implementation_feasibility": 65
+    },
+    {
+      "id": "neural_harmonic_005",
+      "name": "NEURAL HARMONIC",
+      "domains": ["音乐理论", "医院诊断"],
+      "domain_types": ["music", "medicine"],
+      "level": 3,
+      "difficulty_score": 85,
+      "keywords": ["和声谐振", "调性系统", "症状音乐化", "诊断交响乐"],
+      "summary": "用音乐的和声谐振机制重构医疗诊断，让身体发出自己的声音",
+      "business_value": "极高",
+      "innovation_score": 92,
+      "full_description": "See generated case in session",
+      "mechanisms": [
+        "症状和声化转换",
+        "诊断对位法多维分析",
+        "谐振诊断匹配"
+      ],
+      "revenue_model": "SaaS订阅+个性化服务+数据洞察",
+      "market_size": "27亿",
+      "implementation_feasibility": 70
+    },
+    {
+      "id": "event_horizon_006",
+      "name": "EVENT HORIZON",
+      "domains": ["黑洞物理", "婚恋平台"],
+      "domain_types": ["physics", "social"],
+      "level": 4,
+      "difficulty_score": 95,
+      "keywords": ["事件视界", "潮汐力测试", "霍金辐射", "引力波验证"],
+      "summary": "用黑洞的事件视界机制重构婚恋匹配，唯有真爱才能逃脱",
+      "business_value": "极高",
+      "innovation_score": 98,
+      "full_description": "See generated case in session",
+      "mechanisms": [
+        "事件视界匹配机制",
+        "潮汐力关系测试",
+        "霍金辐射深度对话",
+        "引力波伴侣验证",
+        "虫洞穿越系统"
+      ],
+      "revenue_model": "会员制+虚拟约会+高端配对",
+      "market_size": "63.5亿",
+      "implementation_feasibility": 55
+    }
+  ],
+  "search_index": {
+    "by_domain": {
+      "technology": ["aion_001"],
+      "ai": ["aion_001", "synapse_x_002"],
+      "retail": ["schrodingers_cafe_003"],
+      "physics": ["schrodingers_cafe_003", "event_horizon_006"],
+      "biology": ["mycelium_logistics_004"],
+      "logistics": ["mycelium_logistics_004"],
+      "music": ["neural_harmonic_005"],
+      "medicine": ["neural_harmonic_005"],
+      "social": ["event_horizon_006"]
+    },
+    "by_level": {
+      "1": ["schrodingers_cafe_003"],
+      "2": ["aion_001", "synapse_x_002"],
+      "3": ["mycelium_logistics_004", "neural_harmonic_005"],
+      "4": ["event_horizon_006"]
+    },
+    "by_keywords": {
+      "因果推理": ["aion_001"],
+      "叠加态": ["schrodingers_cafe_003"],
+      "分布式决策": ["mycelium_logistics_004"],
+      "和声谐振": ["neural_harmonic_005"],
+      "事件视界": ["event_horizon_006"]
+    }
+  },
+  "market_data_templates": {
+    "retail": {
+      "market_size_source": "Statista/艾瑞咨询",
+      "growth_rate": "5-10%",
+      "key_players": "行业前三名",
+      "average_arpu": "100-500元"
+    },
+    "technology": {
+      "market_size_source": "IDC/Gartner",
+      "growth_rate": "15-25%",
+      "key_players": "科技巨头",
+      "average_arpu": "1000-5000元"
+    },
+    "medicine": {
+      "market_size_source": "弗若斯特沙利文",
+      "growth_rate": "10-20%",
+      "key_players": "医疗科技公司",
+      "average_arpu": "500-2000元"
+    }
+  }
+}
