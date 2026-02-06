@@ -1,7 +1,7 @@
 {
   "version": "2.0",
   "last_updated": "2026-02-06",
-  "total_cases": 6,
+  "total_cases": 8,
   "cases": [
     {
       "id": "aion_001",
@@ -126,6 +126,51 @@
       "revenue_model": "会员制+虚拟约会+高端配对",
       "market_size": "63.5亿",
       "implementation_feasibility": 55
+    },
+    {
+      "id": "neuro_risk_007",
+      "name": "NEURO-RISK",
+      "domains": ["神经科学", "赌博机制"],
+      "domain_types": ["neuroscience", "behavioral_design"],
+      "level": 3,
+      "difficulty_score": 88,
+      "keywords": ["多巴胺回路", "预测误差", "神经可塑性", "健康成瘾设计"],
+      "summary": "用神经科学的奖励机制重构健康行为的成瘾性设计",
+      "business_value": "极高",
+      "innovation_score": 95,
+      "full_description": "Generated case - 神经风险博弈系统",
+      "mechanisms": [
+        "预测误差奖励系统",
+        "神经可塑性重塑",
+        "健康价值共创池",
+        "神经防护系统"
+      ],
+      "revenue_model": "B2B订阅+B2C会员+数据洞察+硬件分成",
+      "market_size": "59.5亿",
+      "implementation_feasibility": 68
+    },
+    {
+      "id": "chronos_protocol_008",
+      "name": "CHRONOS PROTOCOL",
+      "domains": ["时间旅行", "项目管理"],
+      "domain_types": ["physics", "management"],
+      "level": 4,
+      "difficulty_score": 92,
+      "keywords": ["时间悖论", "平行时间线", "因果链优化", "项目预测"],
+      "summary": "用时间旅行的因果修正机制重构项目的决策优化系统",
+      "business_value": "极高",
+      "innovation_score": 98,
+      "full_description": "Generated case - 柯罗诺斯项目流协议",
+      "mechanisms": [
+        "项目时间线预测器",
+        "因果链优化器",
+        "知识时间胶囊",
+        "时间膨胀团队加速",
+        "未来观测者系统"
+      ],
+      "revenue_model": "SaaS订阅+预测咨询+数据洞察+培训认证",
+      "market_size": "25亿",
+      "implementation_feasibility": 75
     }
   ],
   "search_index": {
@@ -138,20 +183,25 @@
       "logistics": ["mycelium_logistics_004"],
       "music": ["neural_harmonic_005"],
       "medicine": ["neural_harmonic_005"],
-      "social": ["event_horizon_006"]
+      "social": ["event_horizon_006"],
+      "neuroscience": ["neuro_risk_007"],
+      "behavioral_design": ["neuro_risk_007"],
+      "management": ["chronos_protocol_008"]
     },
     "by_level": {
       "1": ["schrodingers_cafe_003"],
       "2": ["aion_001", "synapse_x_002"],
-      "3": ["mycelium_logistics_004", "neural_harmonic_005"],
-      "4": ["event_horizon_006"]
+      "3": ["mycelium_logistics_004", "neural_harmonic_005", "neuro_risk_007"],
+      "4": ["event_horizon_006", "chronos_protocol_008"]
     },
     "by_keywords": {
       "因果推理": ["aion_001"],
       "叠加态": ["schrodingers_cafe_003"],
       "分布式决策": ["mycelium_logistics_004"],
       "和声谐振": ["neural_harmonic_005"],
-      "事件视界": ["event_horizon_006"]
+      "事件视界": ["event_horizon_006"],
+      "多巴胺回路": ["neuro_risk_007"],
+      "时间悖论": ["chronos_protocol_008"]
     }
   },
   "market_data_templates": {

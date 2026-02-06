@@ -133,14 +133,20 @@
     "缺乏主动满意度收集机制"
   ],
   "performance_metrics": {
-    "total_cases_generated": 6,
-    "total_word_count": 140000,
+    "total_cases_generated": 8,
+    "total_word_count": 240000,
     "user_satisfaction": "high",
-    "most_successful_case": "EVENT HORIZON - 黑洞物理+婚恋平台 (Level 4, 98%创新度)",
+    "most_successful_case": "CHRONOS PROTOCOL - 时间旅行+项目管理 (Level 4, 98%创新度)",
     "new_features": {
       "adaptive_difficulty": "v1.2 - 4级智能难度评估",
       "case_search": "v1.2.1 - 案例库索引系统",
       "market_validation": "v2.0 - 真实市场数据验证"
+    },
+    "new_cases": {
+      "neuro_risk": "NEURAL HARMONIC - 音乐理论+医院诊断 (Level 3) - 27亿市场",
+      "event_horizon": "EVENT HORIZON - 黑洞物理+婚恋平台 (Level 4) - 63.5亿市场",
+      "neuro_risk": "NEURO-RISK - 神经科学+赌博机制 (Level 3) - 59.5亿市场",
+      "chronos": "CHRONOS PROTOCOL - 时间旅行+项目管理 (Level 4) - 25亿市场"
     },
     "areas_needing_improvement": [
       "可以添加更多视觉图表生成逻辑",
